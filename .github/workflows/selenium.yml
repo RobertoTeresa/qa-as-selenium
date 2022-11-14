@@ -57,7 +57,7 @@ jobs:
 
       - name: Generate artifact for ExtentReports Spark HTML
         uses: actions/upload-artifact@v3
-        if: ${{ github.event.inputs.extent == 'true' }}
+        if: ${{ github.event.inputs.extent == true }}
         with:
           name: report_html
           path: ./extent-reports/spark
