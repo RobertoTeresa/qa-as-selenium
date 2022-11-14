@@ -46,7 +46,7 @@ jobs:
         run: echo allure ${{ github.event.inputs.allure }} extent ${{ github.event.inputs.extent }} pdf ${{ github.event.inputs.pdf }} recorder ${{ github.event.inputs.recorder }}
 
       - name: Run Selenium with Maven
-        run: mvn clean test -Dbrowser=${{ github.event.inputs.browser }} -Ddocker=false -Dproxy=${{ secrets.PROXY_HOST_PORT }}
+        run: mvn clean test -Dbrowser=${{ github.event.inputs.browser }} -Ddocker=false -Dproxy=54.73.106.135:9000
 
       - name: Generate artifact for Extent PDF
         uses: actions/upload-artifact@v3
