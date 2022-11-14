@@ -3,7 +3,9 @@
 Feature: Casos de prueba sobre la página principal de Diario AS
 
   Background:
-    Given El usuario se encuentra en la página de inicio
+    Given Pruebo acceder a MyLocation
+    And Espero 5 segundos
+    And El usuario se encuentra en la página de inicio
     And El usuario acepta el pop-up de cookies
 
   @AUT-1 @publicidad @severity=minor
