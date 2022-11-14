@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+  chrome:
+    image: selenium/standalone-chrome:latest
+    hostname: chrome
+    networks:
+      - web
+    privileged: true
+    shm_size: 2g
