@@ -57,13 +57,7 @@ jobs:
         with:
           name: report_video
           path: ./test-recordings
-          
-        # - name: Deploy report index to GitHub Page
-        # uses: JamesIves/github-pages-deploy-action@4.1.5
-        # with:
-        # branch: gh-pages
-        # folder: ./reports/spark
-          
+
   allure:
     needs: selenium
     if: always()
@@ -80,8 +74,8 @@ jobs:
         if: always()
         continue-on-error: true
         with:
-          ref: gh-pages
-          path: gh-pages
+          ref: allure
+          path: allure
 
       - name: Get AllureReports results
         uses: simple-elf/allure-report-action@master
@@ -89,7 +83,7 @@ jobs:
         id: allure-report
         with:
           allure_results: ./allure-results
-          gh_pages: gh-pages
+          gh_pages: allure
           allure_report: allure-report
           allure_history: allure-history
           keep_reports: 10
@@ -99,5 +93,5 @@ jobs:
         uses: peaceiris/actions-gh-pages@v2
         env:
           PERSONAL_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PUBLISH_BRANCH: gh-pages
+          PUBLISH_BRANCH: allure
           PUBLISH_DIR: allure-history

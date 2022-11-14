@@ -17,7 +17,7 @@ Feature: Casos de prueba sobre la página principal de Diario AS
   @AUT-2 @publicidad @severity=minor
   Scenario Outline: Carga de contenedor de tipo STICKY en la portada
     When El usuario espera a que cargue la página por completo
-    And El usuario se desplaza hasta el listado de artículos
+    # And El usuario se desplaza hasta el listado de artículos
     Then El usuario visualiza el elemento publicitario "<contenedor>"
     And El "<contenedor>" tiene una de las dimensiones indicadas "<dimensiones>"
     Examples:
