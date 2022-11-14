@@ -1,10 +1,18 @@
 name: diario as - selenium
-# run-name: selenium - ${{ inputs.os }} - ${{ inputs.browser }}
-run-name: selenium - macos-latest - ${{ inputs.browser }}
+run-name: selenium - ${{ inputs.os }} - ${{ inputs.browser }}
+# run-name: selenium - macos-latest - ${{ inputs.browser }}
 
 on:
   workflow_dispatch:
     inputs:
+      os:
+        type: choice
+        description: Elige el sistema operativo
+        required: true
+        options:
+          - macos-latest
+          - ubuntu-latest
+          - windows-latest
       browser:
         type: choice
         description: Elige el navegador
@@ -31,8 +39,8 @@ on:
 
 jobs:
   selenium:
-    # runs-on: ${{ github.event.inputs.os }}
-    runs-on: macos-latest
+    runs-on: ${{ github.event.inputs.os }}
+    # runs-on: macos-latest
     steps:
       - uses: actions/checkout@v3
       - name: Set up JDK 11
