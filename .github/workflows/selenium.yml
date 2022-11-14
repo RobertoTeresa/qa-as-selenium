@@ -50,35 +50,35 @@ jobs:
 
       - name: Generate artifact for Extent PDF
         uses: actions/upload-artifact@v3
-        if: ${{ github.event.inputs.pdf == true }}
+        if: ${{ github.event.inputs.pdf == 'true' }}
         with:
           name: report_pdf
           path: ./extent-reports/pdf
 
       - name: Generate artifact for ExtentReports Spark HTML
         uses: actions/upload-artifact@v3
-        if: ${{ github.event.inputs.extent == true }}
+        if: ${{ github.event.inputs.extent == 'true' }}
         with:
           name: report_html
           path: ./extent-reports/spark
 
       - name: Generate artifact for Allure Reports
         uses: actions/upload-artifact@v3
-        if: ${{ github.event.inputs.allure == true }}
+        if: ${{ github.event.inputs.allure == 'true' }}
         with:
           name: report_allure
           path: ./allure-results
 
       - name: Generate artifact for video recording
         uses: actions/upload-artifact@v3
-        if: ${{ github.event.inputs.recorder == true }}
+        if: ${{ github.event.inputs.recorder == 'true' }}
         with:
           name: report_video
           path: ./test-recordings
 
   allure:
     needs: selenium
-    if: ${{ github.event.inputs.allure == true }}
+    if: ${{ github.event.inputs.allure == 'true' }}
     runs-on: ubuntu-latest
     steps:
       - name: Download Artifact
