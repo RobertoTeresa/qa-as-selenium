@@ -7,7 +7,7 @@ Feature: Casos de prueba sobre la página principal de Diario AS
     And El usuario acepta el pop-up de cookies
 
   @AUT-1 @publicidad @severity=minor
-  Scenario: CP01. Carga de contenedores de tipo SKY / SKIN en la portada
+  Scenario: CP01. Carga de contenedores SKY en caso de no tener SKIN en la portada
     When El usuario espera a que cargue la página por completo
     Then El usuario visualiza el contenedor SKIN o en su lugar los SKY
     And En caso de no haber SKIN los SKY tienen las dimensiones indicadas
