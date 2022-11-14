@@ -25,7 +25,7 @@ public class Hooks {
     @Before
     @SuppressWarnings("deprecation")
     public void setUp(Scenario scenario) throws Exception {
-        ScreenRecorder.startRecord(scenario.getName());
+        //ScreenRecorder.startRecord(scenario.getName());
 
         String browser = Flags.getInstance().getBrowser();
         if (StringUtils.isBlank(browser)) browser = "chrome";
@@ -86,6 +86,6 @@ public class Hooks {
             System.err.println(somePlatformsDontSupportScreenshots.getMessage());
         }
         driver.quit();
-        ScreenRecorder.stopRecord();
+        //ScreenRecorder.stopRecord();
     }
 }
