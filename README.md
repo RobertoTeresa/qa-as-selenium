@@ -82,7 +82,7 @@ mvn clean test
 
 - Especificando una etiqueta de cucumber para ejecutar solo ciertos casos (portada, articulo, publicidad, AUT-1)
 ```sh
-mvn clean test -Dcucumber.options='--tags @<etiqueta>'
+mvn clean test -Dcucumber.filter.tags='@<etiqueta>'
 ```
 
 - Especificando navegador (Chrome, Safari)
