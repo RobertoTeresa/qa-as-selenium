@@ -81,12 +81,11 @@ jobs:
     needs: selenium
     if: always()
     runs-on: ubuntu-latest
-    with:
-      allure: true
     steps:
       - name: Download Artifact
         uses: actions/download-artifact@v3
         with:
+          allure: true
           name: report_allure
           path: ./allure-results
             
@@ -95,6 +94,7 @@ jobs:
         if: always()
         continue-on-error: true
         with:
+          allure: true
           ref: allure
           path: allure
 
@@ -103,6 +103,7 @@ jobs:
         if: always()
         id: allure-report
         with:
+          allure: true
           allure_results: ./allure-results
           gh_pages: allure
           allure_report: allure-report
@@ -112,6 +113,8 @@ jobs:
       - name: Prepare AllureReports deploy to Github Pages
         if: always()
         uses: peaceiris/actions-gh-pages@v2
+        with:
+          allure: true
         env:
           PERSONAL_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PUBLISH_BRANCH: allure
