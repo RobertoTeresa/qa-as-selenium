@@ -9,8 +9,6 @@
 Enlace para acceder a los reportes que ha generado Allure. Por defecto, se visualiza el reporte de la ultima ejecución lanzada. Para poder comprobar las ejecuciones anteriores pulsar sobre cualquier pico del gráfico que aparece en el lado derecho del reporte. 
 Configuración: Guardar los últimos 10 reportes.
 
-
-
 ## Descripción
 
 Este repositorio contiene un proyecto Selenium para automatizar los casos de uso de Diario AS en escritorio. ¿Qué es Selenium? Selenium es una herramienta open-source de control de calidad para automatizar y ejecutar pruebas funcionales y de regresión sobre una aplicación. Para más información consultar la documentación de Confluence.
@@ -24,7 +22,7 @@ src/test/resources/features/
 
 ## Documentación
 
-- [Plan de pruebas de TestLink en Confluence](https://confluence.t-prisa.com/display/QADEVOPS/4.6.3.+Plan+de+pruebas+de+Testlink)
+- [Plan de pruebas de TestLink en Confluence](https://confluence.t-prisa.com/display/QADEVOPS/4.6.3.1.1.+AS)
 - [Documentación de Selenium en Confluence](https://confluence.t-prisa.com/pages/viewpage.action?pageId=123149121)
 - [Glosario de términos en Confluence](https://confluence.t-prisa.com/pages/viewpage.action?pageId=123149100)
 
@@ -82,7 +80,7 @@ En caso de que se quiera probar ejecutar el proyecto en local se necesita cumpli
 mvn clean test
 ```
 
-- Especificando una etiqueta de cucumber para ejecutar solo ciertos casos (as, portada, articulo, publicidad, AUT-1)
+- Especificando una etiqueta de cucumber para ejecutar solo ciertos casos (portada, articulo, publicidad, AUT-1)
 ```sh
 mvn clean test -Dcucumber.options='--tags @<etiqueta>'
 ```
