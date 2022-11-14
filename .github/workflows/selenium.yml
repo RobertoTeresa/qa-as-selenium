@@ -13,6 +13,10 @@ on:
           - chrome
           - firefox
           - safari
+      recorder:
+        type: boolean
+        description: Grabar la ejecución
+        required: true
 
 jobs:
   selenium:
