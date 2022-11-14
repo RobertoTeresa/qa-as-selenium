@@ -1,33 +1,43 @@
-## DIARIO AS - SELENIUM (DIGITAL)
+# DIARIO AS - SELENIUM (DIGITAL)
 
-[![selenium - poc de prisa](https://github.com/hiberus-prisa-qa-devops/POC_Selenium/actions/workflows/selenium.yml/badge.svg)](https://github.com/hiberus-prisa-qa-devops/POC_Selenium/actions/workflows/selenium.yml)
+[![diario as - selenium](https://github.com/hiberus-prisa-qa-devops/qa-as-selenium/actions/workflows/selenium.yml/badge.svg)](https://github.com/hiberus-prisa-qa-devops/qa-as-selenium/actions/workflows/selenium.yml)
+[![Allure](https://img.shields.io/badge/Allure-Ultima%20ejecuci%C3%B3n-blue)](https://hiberus-prisa-qa-devops.github.io/qa-as-selenium/)
+[![Confluence](https://img.shields.io/badge/Confleunce-QA%20DevOps-yellow)](https://confluence.t-prisa.com/pages/viewpage.action?pageId=123142852)
 
-## Resultado de la última ejecución
+## [Resultado de la última ejecución](https://hiberus-prisa-qa-devops.github.io/qa-as-selenium/)
 
-Enlace para acceder a los reportes que ha generado Allure. Por defecto, se visualiza el reporte de la ultima ejecución lanzada. Para poder comprobar las ejecuciones anteriores pulsar sobre cualquier pico del gráfico que aparece en el lado derecho del reporte. Conf: Guardar los últimos 10 reportes.
+Enlace para acceder a los reportes que ha generado Allure. Por defecto, se visualiza el reporte de la ultima ejecución lanzada. Para poder comprobar las ejecuciones anteriores pulsar sobre cualquier pico del gráfico que aparece en el lado derecho del reporte. 
+Configuración: Guardar los últimos 10 reportes.
 
-https://hiberus-prisa-qa-devops.github.io/qa-poc-selenium/
+
 
 ## Descripción
 
-Este repositorio contiene un proyecto Selenium para la prueba de concepto de Prisa. Las pruebas se lanzan sobre el site en producción de Diario AS.
-¿Qué es Selenium? Selenium es una herramienta open-source de control de calidad para automatizar y ejecutar pruebas funcionales y de regresión sobre una aplicación. Para más información sobre la herramienta consultar la documentación de confluence.  
+Este repositorio contiene un proyecto Selenium para automatizar los casos de uso de Diario AS en escritorio. ¿Qué es Selenium? Selenium es una herramienta open-source de control de calidad para automatizar y ejecutar pruebas funcionales y de regresión sobre una aplicación. Para más información consultar la documentación de Confluence.
+
+Los casos han sido solicitados por el equipo de PRISA y se están lanzando sobre la [página de producción](https://as.com/). El plan de pruebas con todos los casos y sus respectivos casos se pueden encontrar documentados en Confluence.
+Tambien se pueden consultar los casos dentro de los archivos Cucumber ubicados en la siguiente ruta del proyecto:
+
+```
+src/test/resources/features/
+```
+
+## Documentación
+
+- [Plan de pruebas de TestLink en Confluence](https://confluence.t-prisa.com/display/QADEVOPS/4.6.3.+Plan+de+pruebas+de+Testlink)
+- [Documentación de Selenium en Confluence](https://confluence.t-prisa.com/pages/viewpage.action?pageId=123149121)
+- [Glosario de términos en Confluence](https://confluence.t-prisa.com/pages/viewpage.action?pageId=123149100)
 
 ## Workflow
 
-El workflow corre sobre un sistema operativo `macos-latest` y la batería de pruebas pueden lanzarse tanto en `Google Chrome` como en `Apple Safari`. Una vez finalizado se generan los diferentes reportes:
+El proyecto corre sobre un sistema operativo `macos-latest` y la batería de pruebas pueden lanzarse tanto en `Google Chrome` como en `Apple Safari`. A su vez, se da la opción de elegir que reportes quieres que se generen después de la ejecución. Las opciones disponibles son:
 
-- ExtentReports
-  - HTML: Genera un archivo .html ligero y fácil de usar y lo almacena en un artefacto
-  - PDF: Genera un complejo archivo .pdf y lo almacena en un artefacto 
-- Monte
-  - Video: Genera un archivo .avi de cada caso y los almacena todos en un artefacto
-- Allure
-  - HTML: Genera un reporte web de alto nivel y trazabilidad y lo almacena en un artefacto. Se necesita instalar allure en local para poder abrirlo
- 
-Una vez finalizado el workflow, Github lanza de forma automatiza un bot que despliega el artefacto de Allure en una página (enlace del primer bloque del readme).
+- Generar y publicar un Allure: Genera un reporte web de alto nivel y trazabilidad, lo almacena en un artefacto y lo despliega en una página de Github. 
+- Generar un reporte HTML de ExtentReports: Genera un simple archivo .html y lo almacena en un artefacto. 
+- Generar un PDF de ExtentReports: Genera un archivo .pdf y lo almacena en un artefacto. 
+- Grabar la ejecución con Monte: Genera un archivo .avi de cada caso y lo almacena en un artefacto.
 
-Para más información del workflow revisar el archivo localizado en la siguiente ruta del proyecto:
+Para consultar la pipeline con el workflow, consulta el archivo YML ubicado en la siguiente ruta del proyecto:
 
 ```
 .github/workflows/selenium.yml
@@ -38,30 +48,11 @@ Para más información del workflow revisar el archivo localizado en la siguient
 Para poder comprobar los artefactos generados durante el workflow hay que acceder a la propia ejecución. Para ello podemos seguir los siguientes pasos:
 
 1. Acceder a la pestaña de `Actions`
-2. En el menú de la izquierda seleccionar el workflow `selenium - poc de prisa`
+2. En el menú de la izquierda seleccionar el workflow `diario as - selenium`
 3. Seleccionar la ejecución deseada
 4. Bajar hasta el fondo de la página al apartado `Artifacts`
 5. Pulsar sobre el artefacto deseado 
 6. Una vez descargado, descomprimir el archivo .zip
-
-## Casos de prueba / escenarios
-
-El proyecto consiste de cuatro casos de prueba decididos por el QA Lead y el PO.
-
-- Access to motor league news
-  - AC: The Atletico de Madrid news are displayed
-- Return to home from a football page
-  - AC: The user is redirected to the home page
-- Share news with Facebook
-  - AC: The Facebook share window is displayed
-- Access to motor league news
-  - AC: The Formula One league advertisement element is displayed
-
-Para más información de los casos de prueba y los steps que los forman revisar el archivo feature localizado en la siguiente ruta del proyecto:
-
-```
-src/test/resources/functionalTest/diarioAS.feature
-```
 
 ## Tecnologías utilizadas
 
@@ -86,14 +77,22 @@ En caso de que se quiera probar ejecutar el proyecto en local se necesita cumpli
 
 ## Comando para ejecutar Selenium
 
-- Sin especificar navegador (Chrome por defecto)
-
+- Con parametros por defecto (Chrome, sin Docker, sin Proxy)
 ```sh
 mvn clean test
 ```
 
-- Especificando navegador (Chrome, Safari)
+- Especificando una etiqueta de cucumber para ejecutar solo ciertos casos (as, portada, articulo, publicidad, AUT-1)
+```sh
+mvn clean test -Dcucumber.options='--tags @<etiqueta>'
+```
 
+- Especificando navegador (Chrome, Safari)
 ```sh
 mvn clean test -Dbrowser=<navegador>
+```
+
+- Especificando navegador, docker y proxy
+```sh
+mvn clean test -Dbrowser=<navegador> -Ddocker=<booleano> -Dproxy=<ip>:<puerto>
 ```
