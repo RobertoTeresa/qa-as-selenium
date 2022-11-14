@@ -1,23 +1,38 @@
 name: diario as - selenium
-# run-name: selenium - ${{ inputs.os }} - ${{ inputs.browser }}
-run-name: selenium - macos-latest - ${{ inputs.browser }}
+run-name: selenium - ${{ inputs.os }} - ${{ inputs.browser }}
+# run-name: selenium - macos-latest - ${{ inputs.browser }}
 
 on:
   workflow_dispatch:
     inputs:
       browser:
         type: choice
-        description: Elije el navegador
+        description: Elige el navegador
         required: true
         options:
           - chrome
-          - firefox
           - safari
+      allure:
+        type: boolean
+        description: Publicar en Allure
+        default: true
+      extent:
+        type: boolean
+        description: Generar reporte Extent
+        default: true
+      pdf:
+        type: boolean
+        description: Generar PDF
+        default: true
+      recorder:
+        type: boolean
+        description: Grabar la ejecución
+        default: true
 
 jobs:
   selenium:
-    # runs-on: ${{ github.event.inputs.os }}
-    runs-on: macos-latest
+    runs-on: ${{ github.event.inputs.os }}
+    # runs-on: macos-latest
     steps:
       - uses: actions/checkout@v3
       - name: Set up JDK 11
@@ -27,40 +42,43 @@ jobs:
           distribution: 'temurin'
           cache: maven
 
+      - name: Check
+        run: echo allure ${{ github.event.inputs.allure }} extent ${{ github.event.inputs.extent }} pdf ${{ github.event.inputs.pdf }} recorder ${{ github.event.inputs.recorder }}
+
       - name: Run Selenium with Maven
         run: mvn clean test -Dbrowser=${{ github.event.inputs.browser }} -Ddocker=false -Dproxy=${{ secrets.PROXY_HOST_PORT }}
 
       - name: Generate artifact for Extent PDF
         uses: actions/upload-artifact@v3
-        if: always()
+        if: ${{ github.event.inputs.pdf == true }}
         with:
           name: report_pdf
           path: ./extent-reports/pdf
 
       - name: Generate artifact for ExtentReports Spark HTML
         uses: actions/upload-artifact@v3
-        if: always()
+        if: ${{ github.event.inputs.extent == 'true' }}
         with:
           name: report_html
           path: ./extent-reports/spark
 
       - name: Generate artifact for Allure Reports
         uses: actions/upload-artifact@v3
-        if: always()
+        if: ${{ github.event.inputs.allure == true }}
         with:
           name: report_allure
           path: ./allure-results
 
       - name: Generate artifact for video recording
         uses: actions/upload-artifact@v3
-        if: always()
+        if: ${{ github.event.inputs.recorder == true }}
         with:
           name: report_video
           path: ./test-recordings
 
   allure:
     needs: selenium
-    if: always()
+    if: ${{ github.event.inputs.allure == true }}
     runs-on: ubuntu-latest
     steps:
       - name: Download Artifact
