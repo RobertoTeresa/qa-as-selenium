@@ -13,10 +13,21 @@ on:
           - chrome
           - firefox
           - safari
+      allure:
+        type: boolean
+        description: Publicar en Allure
+        default: true
+      extent:
+        type: boolean
+        description: Generar reporte Extent
+        default: true
+      pdf:
+        type: boolean
+        description: Generar PDF
+        default: true
       recorder:
         type: boolean
         description: Grabar la ejecución
-        required: true
         default: true
 
 jobs:
