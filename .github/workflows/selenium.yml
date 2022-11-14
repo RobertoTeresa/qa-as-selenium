@@ -43,49 +43,45 @@ jobs:
           cache: maven
 
       - name: Run Selenium with Maven
+        if: ${{ github.event.inputs.allure == "true" }}
         run: mvn clean test -Dbrowser=${{ github.event.inputs.browser }} -Ddocker=false -Dproxy=${{ secrets.PROXY_HOST_PORT }}
 
       - name: Generate artifact for Extent PDF
         uses: actions/upload-artifact@v3
-        if: always()
+        if: ${{ github.event.inputs.allure == "true" }}
         with:
-          pdf: true
           name: report_pdf
           path: ./extent-reports/pdf
 
       - name: Generate artifact for ExtentReports Spark HTML
         uses: actions/upload-artifact@v3
-        if: always()
+        if: ${{ github.event.inputs.allure == "true" }}
         with:
-          extent: true
           name: report_html
           path: ./extent-reports/spark
 
       - name: Generate artifact for Allure Reports
         uses: actions/upload-artifact@v3
-        if: always()
+        if: ${{ github.event.inputs.allure == "true" }}
         with:
-          allure: true
           name: report_allure
           path: ./allure-results
 
       - name: Generate artifact for video recording
         uses: actions/upload-artifact@v3
-        if: always()
+        if: ${{ github.event.inputs.allure == "true" }}
         with:
-          recorder: true
           name: report_video
           path: ./test-recordings
 
   allure:
     needs: selenium
-    if: always()
+    if: ${{ github.event.inputs.allure == "true" }}
     runs-on: ubuntu-latest
     steps:
       - name: Download Artifact
         uses: actions/download-artifact@v3
         with:
-          allure: true
           name: report_allure
           path: ./allure-results
             
@@ -94,7 +90,6 @@ jobs:
         if: always()
         continue-on-error: true
         with:
-          allure: true
           ref: allure
           path: allure
 
@@ -103,7 +98,6 @@ jobs:
         if: always()
         id: allure-report
         with:
-          allure: true
           allure_results: ./allure-results
           gh_pages: allure
           allure_report: allure-report
@@ -113,8 +107,6 @@ jobs:
       - name: Prepare AllureReports deploy to Github Pages
         if: always()
         uses: peaceiris/actions-gh-pages@v2
-        with:
-          allure: true
         env:
           PERSONAL_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PUBLISH_BRANCH: allure
