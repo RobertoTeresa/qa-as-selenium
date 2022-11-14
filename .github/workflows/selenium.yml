@@ -43,19 +43,18 @@ jobs:
           cache: maven
 
       - name: Run Selenium with Maven
-        if: ${{ github.event.inputs.allure == true }}
         run: mvn clean test -Dbrowser=${{ github.event.inputs.browser }} -Ddocker=false -Dproxy=${{ secrets.PROXY_HOST_PORT }}
 
       - name: Generate artifact for Extent PDF
         uses: actions/upload-artifact@v3
-        if: ${{ github.event.inputs.allure == true }}
+        if: ${{ github.event.inputs.pdf == true }}
         with:
           name: report_pdf
           path: ./extent-reports/pdf
 
       - name: Generate artifact for ExtentReports Spark HTML
         uses: actions/upload-artifact@v3
-        if: ${{ github.event.inputs.allure == true }}
+        if: ${{ github.event.inputs.extent == true }}
         with:
           name: report_html
           path: ./extent-reports/spark
@@ -69,7 +68,7 @@ jobs:
 
       - name: Generate artifact for video recording
         uses: actions/upload-artifact@v3
-        if: ${{ github.event.inputs.allure == true }}
+        if: ${{ github.event.inputs.recorder == true }}
         with:
           name: report_video
           path: ./test-recordings
