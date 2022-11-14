@@ -45,10 +45,11 @@ public class Hooks {
                 }
                 break;
             case "safari":
-                Proxy proxy = new Proxy();
-                proxy.setHttpProxy(proxyString);
                 SafariOptions optionsSafari = new SafariOptions();
-                if (isProxy) { optionsSafari.setProxy(proxy); }
+                if (isProxy) {
+                    Proxy proxy = new Proxy();
+                    proxy.setHttpProxy(proxyString);
+                    optionsSafari.setProxy(proxy); }
                 if (isDocker) {
                     driver = WebDriverManager.safaridriver().capabilities(optionsSafari).browserInDocker().create();
                 } else {
