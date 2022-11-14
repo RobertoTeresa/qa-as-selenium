@@ -5,18 +5,6 @@ run-name: selenium - ${{ inputs.os }} - ${{ inputs.browser }}
 on:
   workflow_dispatch:
     inputs:
-      os:
-        type: choice
-        description: Elige el sistema operativo
-        required: true
-        options:
-          - macos-latest
-          - ubuntu-latest
-          - windows-latest
-      docker:
-        type: boolean
-        description: Lanzar con docker
-        default: false
       browser:
         type: choice
         description: Elige el navegador
@@ -55,7 +43,7 @@ jobs:
           cache: maven
 
       - name: Run Selenium with Maven
-        run: mvn clean test -Dbrowser=${{ github.event.inputs.browser }} -Ddocker=${{ github.event.inputs.docker }} -Dproxy=${{ secrets.PROXY_HOST_PORT }}
+        run: mvn clean test -Dbrowser=${{ github.event.inputs.browser }} -Ddocker=false -Dproxy=${{ secrets.PROXY_HOST_PORT }}
 
       - name: Generate artifact for Extent PDF
         uses: actions/upload-artifact@v3
