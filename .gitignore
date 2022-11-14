@@ -1,0 +1,30 @@
+# Extent
+extent-reports
+
+# Java
+.class
+.jar
+.war
+.ear
+hs_err_pid*
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# IntelliJ
+*.iml
+.idea/
+
+# Maven
+target/
+
+# Allure
+.allure
+allure-results
+
+# Record
+test-recordings
+
+# Cucumber
+cucumber-reporting
