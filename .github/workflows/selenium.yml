@@ -20,6 +20,8 @@ on:
         options:
           - chrome
           - safari
+      reportes:
+        description: Elige que reportes generar
       allure:
         type: boolean
         description: Publicar en Allure
