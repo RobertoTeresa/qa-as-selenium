@@ -17,6 +17,7 @@ on:
         type: boolean
         description: Grabar la ejecución
         required: true
+        default: true
 
 jobs:
   selenium:
