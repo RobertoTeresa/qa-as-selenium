@@ -1,38 +1,23 @@
 name: diario as - selenium
-run-name: selenium - ${{ inputs.os }} - ${{ inputs.browser }}
-# run-name: selenium - macos-latest - ${{ inputs.browser }}
+# run-name: selenium - ${{ inputs.os }} - ${{ inputs.browser }}
+run-name: selenium - macos-latest - ${{ inputs.browser }}
 
 on:
   workflow_dispatch:
     inputs:
       browser:
         type: choice
-        description: Elige el navegador
+        description: Elije el navegador
         required: true
         options:
           - chrome
+          - firefox
           - safari
-      allure:
-        type: boolean
-        description: Publicar en Allure
-        default: true
-      extent:
-        type: boolean
-        description: Generar reporte Extent
-        default: true
-      pdf:
-        type: boolean
-        description: Generar PDF
-        default: true
-      recorder:
-        type: boolean
-        description: Grabar la ejecución
-        default: true
 
 jobs:
   selenium:
-    runs-on: ${{ github.event.inputs.os }}
-    # runs-on: macos-latest
+    # runs-on: ${{ github.event.inputs.os }}
+    runs-on: macos-latest
     steps:
       - uses: actions/checkout@v3
       - name: Set up JDK 11
@@ -47,35 +32,35 @@ jobs:
 
       - name: Generate artifact for Extent PDF
         uses: actions/upload-artifact@v3
-        if: ${{ github.event.inputs.pdf == true }}
+        if: always()
         with:
           name: report_pdf
           path: ./extent-reports/pdf
 
       - name: Generate artifact for ExtentReports Spark HTML
         uses: actions/upload-artifact@v3
-        if: ${{ github.event.inputs.extent == true }}
+        if: always()
         with:
           name: report_html
           path: ./extent-reports/spark
 
       - name: Generate artifact for Allure Reports
         uses: actions/upload-artifact@v3
-        if: ${{ github.event.inputs.allure == true }}
+        if: always()
         with:
           name: report_allure
           path: ./allure-results
 
       - name: Generate artifact for video recording
         uses: actions/upload-artifact@v3
-        if: ${{ github.event.inputs.recorder == true }}
+        if: always()
         with:
           name: report_video
           path: ./test-recordings
 
   allure:
     needs: selenium
-    if: ${{ github.event.inputs.allure == true }}
+    if: always()
     runs-on: ubuntu-latest
     steps:
       - name: Download Artifact
@@ -83,7 +68,7 @@ jobs:
         with:
           name: report_allure
           path: ./allure-results
-            
+
       - name: Get AllureReports history
         uses: actions/checkout@v3
         if: always()
