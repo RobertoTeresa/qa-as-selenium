@@ -7,11 +7,10 @@ on:
     inputs:
       browser:
         type: choice
-        description: Elije el navegador
+        description: Elige el navegador
         required: true
         options:
           - chrome
-          - firefox
           - safari
       allure:
         type: boolean
@@ -50,6 +49,7 @@ jobs:
         uses: actions/upload-artifact@v3
         if: always()
         with:
+          pdf: true
           name: report_pdf
           path: ./extent-reports/pdf
 
@@ -57,6 +57,7 @@ jobs:
         uses: actions/upload-artifact@v3
         if: always()
         with:
+          extent: true
           name: report_html
           path: ./extent-reports/spark
 
@@ -64,6 +65,7 @@ jobs:
         uses: actions/upload-artifact@v3
         if: always()
         with:
+          allure: true
           name: report_allure
           path: ./allure-results
 
@@ -71,6 +73,7 @@ jobs:
         uses: actions/upload-artifact@v3
         if: always()
         with:
+          recorder: true
           name: report_video
           path: ./test-recordings
 
@@ -78,6 +81,8 @@ jobs:
     needs: selenium
     if: always()
     runs-on: ubuntu-latest
+    with:
+      allure: true
     steps:
       - name: Download Artifact
         uses: actions/download-artifact@v3
