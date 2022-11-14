@@ -13,6 +13,10 @@ on:
           - macos-latest
           - ubuntu-latest
           - windows-latest
+      docker:
+        type: boolean
+        description: Lanzar con docker
+        default: false
       browser:
         type: choice
         description: Elige el navegador
@@ -20,8 +24,6 @@ on:
         options:
           - chrome
           - safari
-      reportes:
-        description: Elige que reportes generar
       allure:
         type: boolean
         description: Publicar en Allure
@@ -53,7 +55,7 @@ jobs:
           cache: maven
 
       - name: Run Selenium with Maven
-        run: mvn clean test -Dbrowser=${{ github.event.inputs.browser }} -Ddocker=false -Dproxy=${{ secrets.PROXY_HOST_PORT }}
+        run: mvn clean test -Dbrowser=${{ github.event.inputs.browser }} -Ddocker=${{ github.event.inputs.docker }} -Dproxy=${{ secrets.PROXY_HOST_PORT }}
 
       - name: Generate artifact for Extent PDF
         uses: actions/upload-artifact@v3
