@@ -1,6 +1,6 @@
-name: diario as - selenium 2
+name: diario as - selenium
 # run-name: selenium - ${{ inputs.os }} - ${{ inputs.browser }}
-run-name: selenium - ubuntu-latest - ${{ inputs.browser }} 2
+run-name: selenium - ubuntu-latest - ${{ inputs.browser }}
 
 on:
   workflow_dispatch:
