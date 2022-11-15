@@ -7,6 +7,7 @@ import io.cucumber.java.*;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.commons.lang.StringUtils;
 import org.openqa.selenium.*;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxOptions;
@@ -24,7 +25,7 @@ public class Hooks {
     /** Delete all cookies at the start of each scenario to avoid shared state between tests */
     @Before
     @SuppressWarnings("deprecation")
-    public void setUp(Scenario scenario) throws Exception {
+    public void setUp(Scenario scenario) {
         //ScreenRecorder.startRecord(scenario.getName());
         String browser = Flags.getInstance().getBrowser();
         if (StringUtils.isBlank(browser)) browser = "chrome";
@@ -56,7 +57,7 @@ public class Hooks {
                 }
                 break;
             default:
-                System.setProperty(ChromeDriverService.CHROME_DRIVER_SILENT_OUTPUT_PROPERTY, "true");
+                /**System.setProperty(ChromeDriverService.CHROME_DRIVER_SILENT_OUTPUT_PROPERTY, "true");
                 ChromeOptions optionsChrome = new ChromeOptions();
                 if (isProxy) { optionsChrome.addArguments("--proxy-server=" + proxyString); }
                 optionsChrome.addArguments("--no-sandbox");
@@ -67,7 +68,12 @@ public class Hooks {
                     driver = WebDriverManager.chromedriver().capabilities(optionsChrome).browserInDocker().create();
                 } else {
                     driver = WebDriverManager.chromedriver().capabilities(optionsChrome).create();
-                }
+                } **/
+
+                WebDriverManager.chromedriver().setup();
+                ChromeOptions chromeOptions = new ChromeOptions();
+                chromeOptions.addArguments("--headless");
+                driver = new ChromeDriver(chromeOptions);
         }
 
         driver.manage().timeouts().implicitlyWait(TIMEOUT, TimeUnit.SECONDS);
@@ -77,7 +83,7 @@ public class Hooks {
     }
 
     @After
-    public void evidencias(Scenario scenario) throws Exception {
+    public void evidencias(Scenario scenario) {
         try {
             final byte[] screenByte = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
             scenario.attach(screenByte, "image/png", scenario.getName());
