@@ -24,8 +24,8 @@ public class Hooks {
     /** Delete all cookies at the start of each scenario to avoid shared state between tests */
     @Before
     @SuppressWarnings("deprecation")
-    public void setUp(Scenario scenario) {
-        //ScreenRecorder.startRecord(scenario.getName());
+    public void setUp(Scenario scenario) throws Exception {
+        ScreenRecorder.startRecord(scenario.getName());
         String browser = Flags.getInstance().getBrowser();
         if (StringUtils.isBlank(browser)) browser = "chrome";
         boolean isProxy = true;
@@ -68,10 +68,6 @@ public class Hooks {
                 } else {
                     driver = WebDriverManager.chromedriver().capabilities(optionsChrome).create();
                 }
-                /** WebDriverManager.chromedriver().setup();
-                ChromeOptions chromeOptions = new ChromeOptions();
-                // chromeOptions.addArguments("--headless");
-                driver = new ChromeDriver(chromeOptions);*/
         }
 
         driver.manage().timeouts().implicitlyWait(TIMEOUT, TimeUnit.SECONDS);
@@ -81,7 +77,7 @@ public class Hooks {
     }
 
     @After
-    public void evidencias(Scenario scenario) {
+    public void evidencias(Scenario scenario) throws Exception {
         try {
             final byte[] screenByte = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
             scenario.attach(screenByte, "image/png", scenario.getName());
@@ -89,6 +85,6 @@ public class Hooks {
             System.err.println(somePlatformsDontSupportScreenshots.getMessage());
         }
         driver.quit();
-        //ScreenRecorder.stopRecord();
+        ScreenRecorder.stopRecord();
     }
 }
