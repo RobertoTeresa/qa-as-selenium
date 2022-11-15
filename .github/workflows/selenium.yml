@@ -32,6 +32,7 @@ on:
 jobs:
   selenium:
     # runs-on: ${{ github.event.inputs.os }}
+    # runs-on: macos-latest
     runs-on: [self-hosted]
     steps:
       - uses: actions/checkout@v3
@@ -42,11 +43,9 @@ jobs:
           distribution: 'temurin'
           cache: maven
 
-      - name: Check
-        run: echo allure ${{ github.event.inputs.allure }} extent ${{ github.event.inputs.extent }} pdf ${{ github.event.inputs.pdf }} recorder ${{ github.event.inputs.recorder }}
-
       - name: Run Selenium with Maven
-        run: mvn clean test -Dbrowser=${{ github.event.inputs.browser }} -Ddocker=true
+        # run: mvn clean test -Dbrowser=${{ github.event.inputs.browser }} -Ddocker=false -Dproxy=${{ secrets.PROXY_HOST_PORT }}
+        run: mvn clean test -Dbrowser=${{ github.event.inputs.browser }} -Ddocker=false
 
       - name: Generate artifact for Extent PDF
         uses: actions/upload-artifact@v3

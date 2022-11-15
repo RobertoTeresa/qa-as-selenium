@@ -57,8 +57,10 @@ public abstract class AbstractPage {
     public void waitVisibleById(String id) {
         try {
             WebElement elem = getDriver().findElement(By.id(id));
+            // new WebDriverWait(getDriver(), Duration.ofSeconds(5)).until(ExpectedConditions.visibilityOf(elem));
             new WebDriverWait(getDriver(), Duration.ofSeconds(10)).until(ExpectedConditions.visibilityOf(elem));
         } catch (Exception e) { log.info(e.getMessage()); }
+        // try { Thread.sleep(4000); } catch (InterruptedException e) { log.info(e.getMessage()); }
         try { Thread.sleep(10000); } catch (InterruptedException e) { log.info(e.getMessage()); }
     }
 

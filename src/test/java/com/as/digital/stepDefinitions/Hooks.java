@@ -26,7 +26,6 @@ public class Hooks {
     @SuppressWarnings("deprecation")
     public void setUp(Scenario scenario) throws Exception {
         //ScreenRecorder.startRecord(scenario.getName());
-
         String browser = Flags.getInstance().getBrowser();
         if (StringUtils.isBlank(browser)) browser = "chrome";
         boolean isProxy = true;

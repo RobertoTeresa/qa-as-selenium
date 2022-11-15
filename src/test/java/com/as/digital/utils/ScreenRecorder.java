@@ -38,7 +38,7 @@ public class ScreenRecorder extends org.monte.screenrecorder.ScreenRecorder {
         }
         SimpleDateFormat dateFormat = new SimpleDateFormat("ddMMyy-HHmmss");
         return new File(movieFolder,
-                name + "-" + dateFormat.format(new Date()) + "." + Registry.getInstance().getExtension(fileFormat));
+                dateFormat.format(new Date()) + name + "-" + "." + Registry.getInstance().getExtension(fileFormat));
     }
 
     public static void startRecord(String methodName) throws Exception {
