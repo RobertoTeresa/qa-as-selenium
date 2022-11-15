@@ -1,6 +1,6 @@
-name: diario as - selenium
+name: diario as - selenium 2
 # run-name: selenium - ${{ inputs.os }} - ${{ inputs.browser }}
-run-name: selenium - ubuntu-latest - ${{ inputs.browser }}
+run-name: selenium - ubuntu-latest - ${{ inputs.browser }} 2
 
 on:
   workflow_dispatch:
@@ -12,6 +12,7 @@ on:
         options:
           - chrome
           - safari
+          - firefox
       allure:
         type: boolean
         description: Publicar en Allure
