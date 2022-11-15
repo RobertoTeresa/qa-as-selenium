@@ -45,7 +45,7 @@ jobs:
 
       - name: Run Selenium with Maven
         # run: mvn clean test -Dbrowser=${{ github.event.inputs.browser }} -Ddocker=false -Dproxy=${{ secrets.PROXY_HOST_PORT }}
-        run: mvn clean test -Dbrowser=${{ github.event.inputs.browser }} -Ddocker=false -Dcucumber.filter.tags='AUT-10'
+        run: mvn clean test -Dbrowser=${{ github.event.inputs.browser }} -Ddocker=false
 
       - name: Generate artifact for Extent PDF
         uses: actions/upload-artifact@v3
